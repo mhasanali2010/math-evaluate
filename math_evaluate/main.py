@@ -1,6 +1,6 @@
 import argparse
 
-from math_evaluate.evaluator import evaluate
+from evaluator import evaluate
 
 def init_argument_parser() -> argparse.Namespace:
     """Function to initialize the Argument Parser"""

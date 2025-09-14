@@ -51,8 +51,8 @@ def solve_tokens(tokens: list[int | float | str]) -> str:
     
     # Exponentiation ^
     while '^' in tokens:
-        for i, token in enumerate(tokens):
-            if token == '^':
+        for i in range(len(tokens)-1, 0, -1):
+            if tokens[i] == '^':
                 temp_var = tokens[i-1] ** tokens[i+1]
                 tokens = tokens[:i-1] + [temp_var] + tokens[i+2:]
                 break
