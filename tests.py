@@ -1,5 +1,5 @@
 import unittest
-from evaluator import evaluate, tokenize, solve_tokens, solve_brackets
+from math_evaluate.evaluator import evaluate, tokenize, solve_tokens, solve_brackets
 
 
 class TestTokenizer(unittest.TestCase):
