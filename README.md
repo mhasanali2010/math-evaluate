@@ -15,7 +15,7 @@ pip install math-evaluate
 ## Usage
 Example usage:
 ```bash
-math --eval "10*(5-2)^2 / 3"
+math "10*(5-2)^2 / 3"
 ```
 Output: `RESULT: 30`
 
