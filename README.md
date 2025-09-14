@@ -38,7 +38,7 @@ Output: `RESULT: 30`
 ## Notes
 - This evaluator follows BODMAS/PEMDAS.
 - Division and multiplication are evaluated left to right, same for addition and subtraction.
-- Exponent associativity is not supported.
+- Exponent associativity is supported.
 - Use brackets () if you want to force evaluation order.
 - Requires `Python 3.10` or later.
 - Argument Parsing might glitch when using `zsh` if you try to evaluate an expression which contains `-(`.
