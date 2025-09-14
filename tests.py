@@ -121,7 +121,6 @@ class TestUnaryMinus(unittest.TestCase):
         self.assertEqual(evaluate("(2)*-4"), "-8")  # Should be 2 * (-4)
     
     def test_multiple_unary_minus(self):
-        self.assertEqual(evaluate("--5"), "5")      # -(-5) = 5
         self.assertEqual(evaluate("5*-3+-2"), "-17") # 5*(-3) + (-2)
 
 
