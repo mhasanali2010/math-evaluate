@@ -12,15 +12,13 @@ def init_argument_parser() -> argparse.Namespace:
 
 
 def main() -> None:
-    args = init_argument_parser()
-    expr = args.eval
-    result = evaluate(expr)
-    print("Note:")
-    print(" - This evaluator follows BODMAS/PEMDAS.")
-    print(" - Division and multiplication are evaluated left to right, same for addition and subtraction.")
-    print(" - Exponent associativity is not supported.")
-    print(" - Use brackets () if you want to force evaluation order.")
-    print(f'RESULT: {result}')
+    try:
+        args = init_argument_parser()
+        expr = args.eval
+        result = evaluate(expr)
+        print(f'RESULT: {result}')
+    except SystemExit:
+        print('Error: failed to parse arguments')
 
 
 if __name__ == '__main__':
