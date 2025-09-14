@@ -1,25 +1,33 @@
-import argparse
+import sys
+from .evaluator import evaluate
 
-from evaluator import evaluate
+def main():
+    """Entry point for math-evaluate CLI"""
+    import argparse
 
-def init_argument_parser() -> argparse.Namespace:
-    """Function to initialize the Argument Parser"""
-    parser = argparse.ArgumentParser(description='evaluates mathematical expressions while following BODMAS/PEMDAS')
-    parser.add_argument("--eval", type=str, required=True, help="Evaluate given expression")
+    parser = argparse.ArgumentParser(
+        prog="math",
+        description="Evaluate mathematical expressions (with proper BODMAS/PEMDAS)."
+    )
+    parser.add_argument(
+        "expr",
+        nargs="?",
+        help="Mathematical expression to evaluate"
+    )
+    parser.add_argument(
+        "--eval",
+        dest="expression",
+        help="Expression passed explicitly (avoids shell quoting issues)"
+    )
+
     args = parser.parse_args()
 
-    return args
+    # Pick expression from positional arg or --eval
+    expr = args.expression or args.expr
 
+    if not expr:
+        print("Error: No expression provided.")
+        sys.exit(1)
 
-def main() -> None:
-    try:
-        args = init_argument_parser()
-        expr = args.eval
-        result = evaluate(expr)
-        print(f'RESULT: {result}')
-    except SystemExit:
-        print('Error: failed to parse arguments')
-
-
-if __name__ == '__main__':
-    main()
+    result = evaluate(expr)
+    print(result)

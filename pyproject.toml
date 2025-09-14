@@ -17,4 +17,4 @@ classifiers = [
 ]
 
 [project.scripts]
-math = "math_evaluate.main:main"
+math = "math_evaluate.cli:main"
