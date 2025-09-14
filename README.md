@@ -36,6 +36,7 @@ Output: `RESULT: 30`
         ```
 
 ## Notes
+- Supported operators: +, -, *, /, (, ), ^
 - This evaluator follows BODMAS/PEMDAS.
 - Division and multiplication are evaluated left to right, same for addition and subtraction.
 - Exponent associativity is supported.
