@@ -17,7 +17,7 @@ Example usage:
 ```bash
 math "10*(5-2)^2 / 3"
 ```
-Output: `RESULT: 30`
+Output: `30`
 
 ## Testing
 - Unittests have been included in `./tests.py`
