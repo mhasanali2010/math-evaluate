@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mathematical-expression-evaluator"
+version = "0.1.0"
+description = "A BODMAS/PEMDAS compliant mathematical expression evaluator"
+authors = [{name = "Muhammad Hasan", email = "mhasanali2010@gmail.com"}]
+requires-python = ">=3.10"
+dependencies = []
+readme = "README.md"
+license = {text = "MIT"}
+keywords = ["calculator", "math", "expression", "evaluator", "BODMAS", "PEMDAS"]
+
+[project.scripts]
+math = "main:main"
