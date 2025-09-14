@@ -1,5 +1,5 @@
 import sys
-from .evaluator import evaluate
+from evaluator import evaluate
 
 def main():
     """Entry point for math-evaluate CLI"""

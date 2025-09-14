@@ -5,86 +5,92 @@ def has_operator(tokens: list, op: str) -> bool:
 
 def tokenize(expr: str) -> list[int | float | str]:
     """Given an expression, this function will turn it into tokens"""
-    opers = ['+', '-', '*', '/', '^', '(', ')']
+    try:
+        opers = ['+', '-', '*', '/', '^', '(', ')']
 
-    for oper in opers:
-        expr = expr.replace(oper, f',{oper},')
+        for oper in opers:
+            expr = expr.replace(oper, f',{oper},')
 
-    tokens = [token.strip() for token in expr.split(',') if token.strip()]
-    
-    temp_tokens = []
-    for token in tokens:
-        if token in opers:
-            temp_tokens.append(token)
-        elif '.' in token:
-            temp_tokens.append(float(token))
-        else:
-            temp_tokens.append(int(token))
+        tokens = [token.strip() for token in expr.split(',') if token.strip()]
+        
+        temp_tokens = []
+        for token in tokens:
+            if token in opers:
+                temp_tokens.append(token)
+            elif '.' in token:
+                temp_tokens.append(float(token))
+            else:
+                temp_tokens.append(int(token))
 
-    tokens = temp_tokens
+        tokens = temp_tokens
 
-    return tokens
+        return tokens
+    except ValueError:
+        return 'Error: Invalid Characters in expression'
 
 
 def solve_tokens(tokens: list[int | float | str]) -> str:
     """Solves a tokenized expression (no brackets) following BODMAS/PEMDAS rules."""
-    tokens = tokens.copy()
+    try:
+        tokens = tokens.copy()
 
-    if tokens[0] == '-' and tokens[1] != '(':
-        temp = str(tokens[1])
-        temp = tokens[0] + temp
-        if '.' in temp:
-            temp = float(temp)
-        else:
-            temp = int(temp)
-        tokens = [temp] + tokens[2:]
-    elif '-' in tokens:
-        for i in range(len(tokens)-1, 0, -1):
-            if tokens[i] == '-' and tokens[i-1] in ['+', '-', '*', '/', '(', '^']:
-                temp = str(tokens[i+1])
-                temp = tokens[i] + temp
-                if '.' in temp:
-                    temp = float(temp)
-                else:
-                    temp = int(temp)
-                tokens = tokens[:i] + [temp] + tokens[i+2:]
-    
-    # Exponentiation ^
-    while '^' in tokens:
-        for i in range(len(tokens)-1, 0, -1):
-            if tokens[i] == '^':
-                temp_var = tokens[i-1] ** tokens[i+1]
-                tokens = tokens[:i-1] + [temp_var] + tokens[i+2:]
-                break
-
-    # Division and Multiplication (left to right)
-    while has_operator(tokens, '*') or has_operator(tokens, '/'):
-        for i, token in enumerate(tokens):
-            if token == '*':
-                temp_var = tokens[i-1] * tokens[i+1]
-                tokens = tokens[:i-1] + [temp_var] + tokens[i+2:]
-                break
-            elif token == '/':
-                if tokens[i+1] != 0:
-                    temp_var = tokens[i-1] / tokens[i+1]
+        if tokens[0] == '-' and tokens[1] != '(':
+            temp = str(tokens[1])
+            temp = tokens[0] + temp
+            if '.' in temp:
+                temp = float(temp)
+            else:
+                temp = int(temp)
+            tokens = [temp] + tokens[2:]
+        elif '-' in tokens:
+            for i in range(len(tokens)-1, 0, -1):
+                if tokens[i] == '-' and tokens[i-1] in ['+', '-', '*', '/', '(', '^']:
+                    temp = str(tokens[i+1])
+                    temp = tokens[i] + temp
+                    if '.' in temp:
+                        temp = float(temp)
+                    else:
+                        temp = int(temp)
+                    tokens = tokens[:i] + [temp] + tokens[i+2:]
+        
+        # Exponentiation ^
+        while '^' in tokens:
+            for i in range(len(tokens)-1, 0, -1):
+                if tokens[i] == '^':
+                    temp_var = tokens[i-1] ** tokens[i+1]
                     tokens = tokens[:i-1] + [temp_var] + tokens[i+2:]
                     break
-                else:
-                    return 'Error: Division by zero not possible'
 
-    # Addition and Subtraction (left to right)
-    while has_operator(tokens, '+') or has_operator(tokens, '-'):
-        for i, token in enumerate(tokens):
-            if token == '+':
-                temp_var = tokens[i-1] + tokens[i+1]
-                tokens = tokens[:i-1] + [temp_var] + tokens[i+2:]
-                break
-            elif token == '-':
-                temp_var = tokens[i-1] - tokens[i+1]
-                tokens = tokens[:i-1] + [temp_var] + tokens[i+2:]
-                break
+        # Division and Multiplication (left to right)
+        while has_operator(tokens, '*') or has_operator(tokens, '/'):
+            for i, token in enumerate(tokens):
+                if token == '*':
+                    temp_var = tokens[i-1] * tokens[i+1]
+                    tokens = tokens[:i-1] + [temp_var] + tokens[i+2:]
+                    break
+                elif token == '/':
+                    if tokens[i+1] != 0:
+                        temp_var = tokens[i-1] / tokens[i+1]
+                        tokens = tokens[:i-1] + [temp_var] + tokens[i+2:]
+                        break
+                    else:
+                        return 'Error: Division by zero not possible'
 
-    return str(tokens[0])
+        # Addition and Subtraction (left to right)
+        while has_operator(tokens, '+') or has_operator(tokens, '-'):
+            for i, token in enumerate(tokens):
+                if token == '+':
+                    temp_var = tokens[i-1] + tokens[i+1]
+                    tokens = tokens[:i-1] + [temp_var] + tokens[i+2:]
+                    break
+                elif token == '-':
+                    temp_var = tokens[i-1] - tokens[i+1]
+                    tokens = tokens[:i-1] + [temp_var] + tokens[i+2:]
+                    break
+
+        return str(tokens[0])
+    except ValueError:
+        return 'Error: Invalid Characters in expression'
 
 
 def solve_brackets(expr: str) -> list | str:
