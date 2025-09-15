@@ -6,8 +6,8 @@ class TestTokenizer(unittest.TestCase):
     """Test the tokenize function"""
     
     def test_basic_tokenization(self):
-        result = tokenize("5+3")
-        expected = [5, '+', 3]
+        result = tokenize("5-3")
+        expected = [5, '-', 3]
         self.assertEqual(result, expected)
     
     def test_tokenization_with_spaces(self):
