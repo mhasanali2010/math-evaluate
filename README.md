@@ -25,7 +25,7 @@ In order to use the mathematical expression evaluator in your own projects, foll
     python -m venv venv
     source venv/bin/activate # for macOS/Linux
     venv\Scripts\activate.bat # for windows CMD
-    .\venv\Scripts\activate.bat # for windows Powershell
+    .\venv\Scripts\Activate.ps1 # for windows Powershell
     ```
 - Install math-evaluate using pip:
     ```bash
